@@ -16,7 +16,8 @@ public class Model {
 	private List<User> utenti;
 	
 	public String creaGrafo(int minRevisioni, int anno) {
-		this.grafo= new SimpleWeightedGraph<>(DefaultWeightedEdge.class); //si capisce che è semplice erchè parla di utenti diversi
+		
+		this.grafo= new SimpleWeightedGraph<>(DefaultWeightedEdge.class); //si capisce che è semplice perchè parla di utenti diversi
 		YelpDao dao= new YelpDao();
 		this.utenti= dao.getUsersWithReviews(minRevisioni);
 		Graphs.addAllVertices(this.grafo, this.utenti);

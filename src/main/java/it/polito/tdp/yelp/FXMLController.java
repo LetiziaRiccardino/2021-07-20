@@ -68,33 +68,43 @@ public class FXMLController {
     		String msg=model.creaGrafo(minReview, anno);
     		txtResult.setText(msg);
     		cmbUtente.getItems().clear();
-    		cmbUtente.getItems().addAll(this.model.getUsers());
-    		
-    		
+    		cmbUtente.getItems().addAll(this.model.getUsers()); //popolando la tendina durante la creazione del grafo mi permette di evitare ulteriori controlli. Prima della creazione del grafo la tendina è vota e non posso quindi inserire nulla
+    		//avrei potuto disalilitare il bottone della ricerca utenti simili e abilitarlo solo una volta che la tendina è piena
+    		    		
     		
     	}catch(NumberFormatException e) {
     		txtResult.setText("Inserire un numero valido \n");
     		return;
-    	}
-    	
-    	
-    	
-    	
-    	
-    	
+    	}	
     	
     	
     }
 
     @FXML
     void doUtenteSimile(ActionEvent event) {
-    	User u= cmbUtente.getValue();
+    	User u= cmbUtente.getValue(); 
+    	
+    	if(u==null) { 
+    		txtResult.setText("Devi selezionare un utente dopo aver creatoil grafo.");
+    		return;
+    	}
+    	
     	List<User> vicini= model.utentiPiuSimili(u);
-    	txtResult.setText("Utenti simili: "+vicini.toString());
+    	
+    	txtResult.setText("Utenti più vicini a"+ u+"\n\n");
+    	
+    	for(User us: vicini) {
+    		txtResult.appendText(us.toString()+"\n");
+    	}
+    	
+    	//txtResult.setText("Utenti simili: "+vicini.toString());
     }
     
     @FXML
     void doSimula(ActionEvent event) {
+    	
+    	
+    	
 
     }
     
